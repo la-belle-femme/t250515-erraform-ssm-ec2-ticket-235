@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-branch-name:
-    runs-on: ["linux", "self-hosted", "ubuntu", "custom-runner", "docker"]
+    runs-on: ["linux", "self-hosted", "ubuntu", "custom-runner", "docker"] 
     steps:
       - name: Get Branch Name
         id: branch

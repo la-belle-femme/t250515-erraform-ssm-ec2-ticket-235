@@ -1,0 +1,11 @@
+tags:
+  owner: "Webforx Technology"
+  team: "Webforx Team"
+  environment: "development"
+  project: "edusuc"
+  create_by: "Terraform"
+  cloud_provider: "aws"
+
+s3:
+  gallery:
+    bucket_name: "gallery"

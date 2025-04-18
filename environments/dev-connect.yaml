@@ -1,0 +1,222 @@
+tags:
+  owner: "Webforx Technology"
+  team: "Webforx Team"
+  environment: "development"
+  project: "connect"
+  create_by: "Terraform"
+  cloud_provider: "aws"
+
+vpc:
+  vpc_id: vpc-0cd5e30f5b5cc9770
+  public_subnets: [
+    subnet-0c6820f5859c2f10f,
+    subnet-0aeea1ee0316459ba,
+    subnet-081ea6ed0cc25f00d
+  ]
+  private_subnets: [
+    subnet-05825d1a5df058e41,
+    subnet-011bc317d9c1091b0,
+    subnet-0c7fc8734c70126dc
+  ]
+
+ecr:
+  force_delete: false
+  ecr_repository_names: [
+    ansible-lint,
+    connect-frontend,
+    connect-mobile,
+    ansible,
+    ansible-role,
+    connect-backend,
+    configurations,
+    mysql,
+    terraform,
+    sonarqube
+  ]
+
+s3:
+  gallery:
+    bucket_name: "gallery"
+
+ec2:
+  connect-backend:
+    aws_region: "us-east-1"
+    ec2_instance_ami: "ami-0eebd8a9879bdfafc"
+    ec2_instance_type: "t3.micro"
+    create_on_public_subnet: true
+    instance_name: "backend"
+    create_on_public_subnet: true
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    private_subnet: "subnet-05825d1a5df058e41"
+    public_subnet: "subnet-0c6820f5859c2f10f"
+    root_volume_size: 50
+    enable_termination_protection: true
+    ec2_instance_key_name: "webforx-engineering"
+    sg_name: "backend"
+    allowed_ports: [
+        22,
+        80,
+        443
+      ]
+    allowed_ips: 
+      allow_all_traffic_from forgejo_server: "23.22.235.122/32"
+      allow_all_traffic_from_vpn: "98.85.216.142/32"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws"
+      ansible_cleanup: true
+      backup: true
+
+  connect-deployment:
+    aws_region: "us-east-1"
+    ec2_instance_ami: "ami-04b4f1a9cf54c11d0"
+    ec2_instance_type: "t2.medium"
+    create_on_public_subnet: true
+    instance_name: "deployment"
+    create_on_public_subnet: true
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    private_subnet: "subnet-05825d1a5df058e41"
+    public_subnet: "subnet-0c6820f5859c2f10f"
+    root_volume_size: 30
+    enable_termination_protection: true
+    ec2_instance_key_name: "webforx-engineering"
+    sg_name: "deployment"
+    allowed_ports: []
+    allowed_ips: 
+      allow_all_traffic_from forgejo_server: "23.22.235.122/32"
+      allow_all_traffic_from_vpn: "98.85.216.142/32"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws"
+      ansible_cleanup: true
+      backup: true
+
+  connect-branch-deployment:
+    aws_region: "us-east-1"
+    ec2_instance_ami: "ami-04b4f1a9cf54c11d0"
+    ec2_instance_type: "t2.micro"
+    create_on_public_subnet: true
+    instance_name: "branch-deployment"
+    create_on_public_subnet: true
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    private_subnet: "subnet-05825d1a5df058e41"
+    public_subnet: "subnet-0c6820f5859c2f10f"
+    root_volume_size: 20
+    enable_termination_protection: true
+    ec2_instance_key_name: "webforx-engineering"
+    sg_name: "branch-deployment"
+    allowed_ports: []
+    allowed_ips: 
+      allow_all_traffic_from forgejo_server: "23.22.235.122/32"
+      allow_all_traffic_from_vpn: "98.85.216.142/32"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws"
+      ansible_cleanup: true
+      backup: true
+
+  forgejo-runner:
+    aws_region: "us-east-1"
+    ec2_instance_ami: "ami-04b4f1a9cf54c11d0"
+    ec2_instance_type: "t2.xlarge"
+    create_on_public_subnet: true
+    instance_name: "forgejo-runner"
+    create_on_public_subnet: true
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    private_subnet: "subnet-05825d1a5df058e41"
+    public_subnet: "subnet-0c6820f5859c2f10f"
+    root_volume_size: 50
+    enable_termination_protection: true
+    ec2_instance_key_name: "webforx-engineering"
+    sg_name: "forgejo-runner"
+    allowed_ports: []
+    allowed_ips: 
+      allow_all_traffic_from forgejo_server: "23.22.235.122/32"
+      allow_all_traffic_from_vpn: "98.85.216.142/32"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws"
+      ansible_cleanup: true
+      backup: true
+
+security-group:
+  bastion-sg:
+    region: "us-east-1"
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    sg_name: "bastion-sg"
+    allowed_ips: 
+      allow_all_traffic_from_vpn: "98.85.216.142/32"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws" 
+
+  mariadb-sg:
+    region: "us-east-1"
+    vpc_id: "vpc-0cd5e30f5b5cc9770"
+    sg_name: "mariadb-sg"
+    db_ports:
+      mariadb: 3306
+    bastion_sg_id: "sg-0e5389fdc65d80d3e"
+    tags:
+      owner: "Webforx Technology"
+      team: "Webforx Team"
+      environment: "development"
+      project: "connect"
+      create_by: "Terraform"
+      cloud_provider: "aws"   
+
+rds: 
+  connect-backend:
+    aws_region: "us-east-1"
+    db_name: "mariadb"
+    db_instance_class: "db.t4g.micro"
+    db_storage_size: 20
+    db_storage_type: "gp3"
+    multi_az: false
+    publicly_accessible: false
+    backup_retention_period: 7
+    backup_window: "10:30-11:00"
+    maintenance_window: "Tue:04:49-Tue:05:19"
+    auto_minor_version_upgrade: true
+    deletion_protection: true
+    skip_final_snapshot: false
+    storage_encrypted: true
+    rds_sg_id: "sg-0cae6801a74beece8" 
+    rds_subnet_ids: [
+      "subnet-05825d1a5df058e41", 
+      "subnet-011bc317d9c1091b0",
+      "subnet-0c7fc8734c70126dc"
+    ]
+    rds_subnet_group_name: "rds-subnet-group"
+    rds_parameter_group_name: "custom-mariadb-11-4"
+    rds_family: "mariadb11.4"
+    rds_identifier: "connect-backend"
+    rds_engine: "mariadb"
+    rds_engine_version: "11.4.4"
+    tags: 
+      owner : "Webforx Technology"
+      team : "Webforx Team"
+      environment : "development"
+      project : "connect"
+      create_by : "Terraform"
+      cloud_provider : "aws"        
