@@ -1,10 +1,72 @@
-name: CI/CD automation
+name: Terraform Module CI
+
 on:
   push:
     branches:
-      - "**"  
+      - "**"
 jobs:
-  automation:
-    runs-on: ["linux", "self-hosted", "ubuntu", "custom-runner", "docker"] 
+  tf_code_check:
+    name: Detect and Run Changed Terraform Modules
+    runs-on: [self-hosted, linux, ubuntu, custom-runner, docker]
+
     steps:
-      - run: echo All Good
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🧪 Debug - List files in current directory
+        run: |
+          pwd
+          ls -R
+      - name: 🔢 Get Last 4 Digits of Commit SHA
+        run: |
+          echo "COMMIT_SHA_SHORT=$(git rev-parse --short=4 HEAD)" >> $GITHUB_ENV  
+
+      - name: 🧰 Manually Install Terraform 1.10.5
+        run: |
+          echo "Installing Terraform v1.10.5..."
+          sudo apt-get update -y
+          sudo apt-get install -y unzip curl
+          curl -fsSL https://releases.hashicorp.com/terraform/1.10.5/terraform_1.10.5_linux_amd64.zip -o terraform.zip
+          unzip terraform.zip
+          sudo mv terraform /usr/local/bin/
+          terraform -version     
+
+      # - name: 🧠 Detect Changed Terraform Module
+      #   id: detect
+      #   run: |
+      #     echo "Detecting modified directories..."
+      #     CHANGED_DIR=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^resources/development/' | cut -d/ -f1-3 | sort -u | head -n 1)
+
+      #     COMMIT_SHA=${{ github.sha }}
+      #     SHORT_SHA=${COMMIT_SHA: -4}          
+          
+      #     echo "Changed directory: $CHANGED_DIR"
+      #     echo "Short SHA: $SHORT_SHA"
+
+      #     echo "module_dir=$CHANGED_DIR" >> $GITHUB_OUTPUT
+      #     echo "sha_suffix=$SHORT_SHA" >> $GITHUB_OUTPUT
+
+      # - name: 🚀 Terraform Init, Validate, and Plan
+      #   if: steps.detect.outputs.module_dir != ''
+      #   working-directory: ${{ steps.detect.outputs.module_dir }}
+      #   run: |
+      #     echo "Entering directory: ${{ steps.detect.outputs.module_dir }}"
+      #     terraform init
+      #     terraform fmt
+      #     terraform validate
+      #     terraform plan                   
+
+      - name: 🚀 Terraform Init, Validate, and Plan
+        working-directory: resources/development/aws-ecr
+        run: |
+          echo "** Running Terraform init **"
+          terraform init
+
+          echo "** Running Terraform Format **"
+          terraform fmt
+
+          echo "** Running Terraform Validate **"
+          terraform validate
+
+          echo "** Running Terraform Plan **"
+          terraform plan
