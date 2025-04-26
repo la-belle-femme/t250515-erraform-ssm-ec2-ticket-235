@@ -1,8 +1,8 @@
 
 locals {
   env = merge(
-    yamldecode(file("${path.module}/../../environments/region.yaml")).region.alias,
-    yamldecode(file("${path.module}/../../environments/stg-connect.yaml"))
+    yamldecode(file("${path.module}/../../environments/region.yaml")).alias,
+    yamldecode(file("${path.module}/../../environments/connect.yaml"))
   )
 }
 
