@@ -1,7 +1,0 @@
-tags:
-  owner: "Webforx Technology"
-  team: "Webforx Team"
-  environment: "production"
-  project: "connect"
-  create_by: "Terraform"
-  cloud_provider: "aws"
