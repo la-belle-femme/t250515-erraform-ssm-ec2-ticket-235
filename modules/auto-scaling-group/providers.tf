@@ -25,7 +25,7 @@ data "aws_subnets" "default" {
   }
    filter {
     name   = "availability-zone"
-    values = ["us-east-1a"]
+    values = [format("%sa", var.config.aws_region_main)]
   }
 }
 
