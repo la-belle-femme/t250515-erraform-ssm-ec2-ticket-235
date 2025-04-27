@@ -2,7 +2,7 @@
 locals {
   env = merge(
     yamldecode(file("${path.module}/../../environments/region.yaml")).alias,
-    yamldecode(file("${path.module}/../../environments/connect.yaml"))
+    yamldecode(file("${path.module}/../../environments/webforx.yaml"))
   )
 }
 
@@ -19,5 +19,5 @@ terraform {
 module "s3-backend" {
   source = "../../modules/s3-backend"
   config = local.env.s3
-  tags = local.env.tags
+  tags   = local.env.tags
 }

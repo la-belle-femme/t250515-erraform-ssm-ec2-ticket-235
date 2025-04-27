@@ -1,6 +1,6 @@
 resource "aws_iam_role" "replication" {
   provider = aws.state
-  name     = format("%s-%s-s3-replication-role", var.config.tags["environment"], var.config.tags["project"])
+  name     = format("%s-%s-sandbox-s3-replication-role", var.tags["environment"], var.tags["project"])
 
   assume_role_policy = <<POLICY
 {
@@ -17,12 +17,12 @@ resource "aws_iam_role" "replication" {
   ]
 }
 POLICY
-  tags               = var.config.tags
+  tags               = var.tags
 }
 
 resource "aws_iam_policy" "replication" {
   provider = aws.state
-  name     = format("%s-%s-s3-replication-policy", var.config.tags["environment"], var.config.tags["project"])
+  name     = format("%s-%s-sandbox-s3-replication-policy", var.tags["environment"], var.tags["project"])
 
   policy = <<POLICY
 {
@@ -65,7 +65,7 @@ POLICY
 
 resource "aws_iam_policy_attachment" "replication" {
   provider   = aws.state
-  name       = format("%s-%s-s3-replication-policy-attachment", var.config.tags["environment"], var.config.tags["project"])
+  name       = format("%s-%s-sandbox-s3-replication-policy-attachment", var.tags["environment"], var.tags["project"])
   roles      = ["${aws_iam_role.replication.name}"]
   policy_arn = aws_iam_policy.replication.arn
 }
