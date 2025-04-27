@@ -1,4 +1,4 @@
 dev: us-east-1
 alias:
   aws_region_main: us-east-1
-  aws_region_backup: us-west-2`
+  aws_region_backup: us-west-2
