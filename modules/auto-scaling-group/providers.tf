@@ -23,6 +23,10 @@ data "aws_subnets" "default" {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
+   filter {
+    name   = "availability-zone"
+    values = ["us-east-1a"]
+  }
 }
 
 # Fetch default security group
