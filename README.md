@@ -82,30 +82,30 @@ This guide provides step-by-step instructions on how to install Terraform 1.10.5
 ```
 
 ## Project paths in s3
-- At the root of the bucket, we should directory that represent the project name and create another directory in those to store the state file
+- At the root of the bucket, we should provide directory that represent the project name and create another directory in those to store the state file
 ```t
 backend "s3" {
-    bucket         = "dev-webfox-tf-state"
-    key            = "web-fox/vpc/terraform.tfstate"
+    bucket         = "development-webforx-sandbox-tf-state"
+    key            = "webforx/vpc/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "dev-webfox-tf-state-lock"
+    dynamodb_table = "development-webforx-sandbox-tf-state-lock"
   }
 
 backend "s3" {
-    bucket         = "dev-webfox-tf-state"
-    key            = "connect/rds/terraform.tfstate"
+    bucket         = "development-webforx-sandbox-tf-state"
+    key            = "connect/db/mariadb/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "dev-webfox-tf-state-lock"
+    dynamodb_table = "development-webforx-sandbox-tf-state-lock"
   }
 
 backend "s3" {
-    bucket         = "dev-web-fox-tf-state"
-    key            = "edusuc/rds/terraform.tfstate"
+    bucket         = "development-webforx-sandbox-tf-state"
+    key            = "connect/ec2/bastion/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "dev-webfox-tf-state-lock"
+    dynamodb_table = "development-webforx-sandbox-tf-state-lock"
   }
 ```
 
