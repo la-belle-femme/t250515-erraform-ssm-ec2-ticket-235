@@ -5,6 +5,9 @@ tags:
   project: "webforx"
   create_by: "Terraform"
   cloud_provider: "aws"
+  confidentiality: "internal"
+  costcenter: "dev-webforx-eng"
+
 
 s3:
   aws_region_main: "us-east-1"

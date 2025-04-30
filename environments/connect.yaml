@@ -5,3 +5,5 @@ tags:
   project: "connect"
   create_by: "Terraform"
   cloud_provider: "aws"
+  confidentiality: "internal"
+  costcenter: "dev-connect-eng"
