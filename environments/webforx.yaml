@@ -12,6 +12,7 @@ s3:
   force_destroy: false
 
 aws-budget:
+  aws_region_main: "us-east-1"
   budget_limit      : 200
   thresholds        : [80, 100] 
   email_subscribers :
