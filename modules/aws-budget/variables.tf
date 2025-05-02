@@ -1,6 +1,5 @@
 variable "config" {
   type = object({
-    aws_region_main   = string
     budget_limit      = number
     thresholds        = list(number)
     email_subscribers = list(string)

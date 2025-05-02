@@ -1,6 +1,6 @@
 locals {
   env = merge(
-    yamldecode(file("${path.module}/../../environments/region.yaml")).alias,
+    yamldecode(file("${path.module}/../../environments/region.yaml")),
     yamldecode(file("${path.module}/../../environments/webforx.yaml"))
   )
 }
@@ -25,6 +25,9 @@ backend "s3" {
   }
 }
 
+provider "aws" {
+  region = local.env.dev
+}
 
 module "aws-budget" {
   source = "../../modules/aws-budget"
