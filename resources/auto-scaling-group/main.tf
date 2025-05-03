@@ -1,4 +1,3 @@
-
 locals {
   env = merge(
     yamldecode(file("${path.module}/../../environments/region.yaml")).alias,
@@ -15,6 +14,15 @@ terraform {
     }
   }
 }
+
+backend "s3" {
+bucket = "development-webforx-sandbox-tf-state"
+key = "connect/auto-scaling-group/terraform.tfstate"
+region = "us-east-1"
+encrypt = true
+dynamodb_table = "development-webforx-sandbox-tf-state-lock"
+}
+
 
 module "auto-scaling-group" {
   source = "../../modules/auto-scaling-group"
