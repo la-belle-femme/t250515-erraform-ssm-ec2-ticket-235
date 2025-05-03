@@ -5,7 +5,7 @@ This repository contains Terraform modules and configurations to manage AWS reso
 ## Directory Structure
 
 ```plaintext
-.terraform-module-dev
+terraform-module-dev
 │
 ├── LICENSE.md                          # License information for the project
 ├── README.md                           # Project overview and setup instructions
