@@ -8,11 +8,6 @@ tags:
   confidentiality: "internal"
   costcenter: "dev-webforx-eng"
 
-s3:
-  aws_region_main: "us-east-1"
-  aws_region_backup: "us-east-2"
-  force_destroy: false
-  
 auto-scaling-group:
   aws_region_main:  "us-east-1"
   name:             "default-asg-demo"
