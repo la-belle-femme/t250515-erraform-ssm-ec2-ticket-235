@@ -54,7 +54,7 @@ git remote -v
 echo -e "\n${GREEN}Checking for .gitignore file...${NC}"
 if [ ! -f ".gitignore" ]; then
     echo -e "${YELLOW}Creating .gitignore file...${NC}"
-    cat > .gitignore << 'EOF2'
+    cat > .gitignore << 'EOF'
 # Local .terraform directories
 **/.terraform/*
 
@@ -89,7 +89,7 @@ override.tf.json
 # Local environment files containing secrets
 *-secrets.yaml
 *-credentials.yaml
-EOF2
+EOF
     echo "Created .gitignore file."
 fi
 

@@ -30,7 +30,7 @@ fi
 
 # Step 1: Create/update .gitignore
 echo -e "\n${GREEN}Creating/updating .gitignore file...${NC}"
-cat > .gitignore << 'EOF2'
+cat > .gitignore << 'EOF'
 # Local .terraform directories
 **/.terraform/*
 
@@ -70,7 +70,7 @@ override.tf.json
 *.zip
 *.tar.gz
 *.iso
-EOF2
+EOF
 
 echo "Updated .gitignore file."
 

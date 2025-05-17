@@ -63,15 +63,12 @@ ec2:
   ec2_instance_key_name: ""
   enable_termination_protection: false
   sg_name: "ssm-instance-sg"
-  # sg_id: "sg-0bee99ab0b8beccd1"
   allowed_ports: []
   allowed_ips:
     vpn: "98.85.216.142/32"
   vpc_id: "vpc-0b29462da246e0151" 
   private_subnet: "subnet-0c171df46bf5e3e2f"
   public_subnet: "subnet-08a96a34702e19938"
-  # iam_role_name: "ec2_role"
-  # iam_policy_arn: "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   iam_instance_profile_name: "ec2_profile"
   use_ssm_install_script: true
 
