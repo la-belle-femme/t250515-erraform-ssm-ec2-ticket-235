@@ -3,8 +3,6 @@ locals {
     yamldecode(file("${path.module}/../../environments/region.yaml")),
     yamldecode(file("${path.module}/../../environments/webforx.yaml"))
   )
-  # Add this line to read the SSM installation script
-  ssm_install_script = fileexists("${path.module}/../../modules/ssm-ec2-access/scripts/install-ssm-agent.sh") ? file("${path.module}/../../modules/ssm-ec2-access/scripts/install-ssm-agent.sh") : ""
 }
 
 terraform {
@@ -93,9 +91,7 @@ module "ec2_instances" {
     instance_name             = each.value
     sg_id                     = module.security_group.sg_id # Use output from security group module
     iam_instance_profile_name = local.env.ec2.iam_instance_profile_name
-    # Add this line to conditionally include the user data script
-    user_data = lookup(local.env.ec2, "use_ssm_install_script", false) ? local.ssm_install_script : ""
-    tags      = local.env.tags
+    tags                      = local.env.tags
   })
 }
 

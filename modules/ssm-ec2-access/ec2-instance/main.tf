@@ -5,6 +5,7 @@ resource "aws_instance" "this" {
   key_name               = var.config.ec2_instance_key_name != "" ? var.config.ec2_instance_key_name : null
   vpc_security_group_ids = [var.config.sg_id]
   iam_instance_profile   = var.config.iam_instance_profile_name
+  user_data              = var.config.user_data != "" ? var.config.user_data : null
 
   associate_public_ip_address = var.config.create_on_public_subnet
   disable_api_termination     = var.config.enable_termination_protection
